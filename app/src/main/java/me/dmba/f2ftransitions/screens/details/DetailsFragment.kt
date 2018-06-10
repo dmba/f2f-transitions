@@ -28,8 +28,8 @@ fun newDetailsFragment(data: DataItem, transitionName: String) = DetailsFragment
 
 class DetailsFragment : NavigatorFragment() {
 
-    private val imageTransionName: String by arg(ARG_TRANSITION_NAME)
-    private val imageTransionData: DataItem by arg(ARG_TRANSITION_DATA)
+    private val transitionName: String by arg(ARG_TRANSITION_NAME)
+    private val transitionData: DataItem by arg(ARG_TRANSITION_DATA)
 
     private val picasso: Picasso by lazy { Picasso.get() }
 
@@ -57,9 +57,9 @@ class DetailsFragment : NavigatorFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        detailImageView.transitionName = imageTransionName
+        detailImageView.transitionName = transitionName
 
-        setupView(imageTransionData)
+        setupView(transitionData)
 
         handler.postDelayed(postponeTransitionRunnable, 3000)
     }
