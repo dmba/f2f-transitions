@@ -10,7 +10,7 @@ object DataProvider {
 
             DataItem(
                 "#001",
-                "Dog",
+                "Ulf",
                 "https://c1.staticflickr.com/1/188/417924629_6832e79c98_z.jpg?zz=1"
             ),
 
@@ -46,13 +46,13 @@ object DataProvider {
 
             DataItem(
                 "#007",
-                "Seal",
+                "Tarasiuta",
                 "https://c1.staticflickr.com/4/3852/14729534910_62b338dd72_z.jpg"
             ),
 
             DataItem(
                 "#008",
-                "Tarasiuta",
+                "Rhino",
                 "https://c1.staticflickr.com/1/335/18040640224_f56f05f8dc_z.jpg"
             ),
 
