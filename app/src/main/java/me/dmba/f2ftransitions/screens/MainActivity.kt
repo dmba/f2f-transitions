@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), MainNavigator {
 
         supportFragmentManager.beginTransaction()
             .addSharedElement(sharedView, transitionName)
-            .addToBackStack(null)
+            .addToBackStack(TAG_DETAILS)
             .replace(R.id.activity_main_container, nextFragment, TAG_DETAILS)
             .commitAllowingStateLoss()
     }
