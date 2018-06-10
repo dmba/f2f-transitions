@@ -5,6 +5,7 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_details.*
 import me.dmba.f2ftransitions.R
@@ -32,6 +33,16 @@ class DetailsFragment : NavigatorFragment() {
 
     private val picasso: Picasso by lazy { Picasso.get() }
 
+    private val handler = Handler()
+
+    private val postponeTransitionRunnable: Runnable = Runnable {
+
+        startPostponedEnterTransition()
+
+        Toast.makeText(context, "startPostponedEnterTransition", Toast.LENGTH_LONG).show()
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         postponeEnterTransition()
@@ -50,7 +61,12 @@ class DetailsFragment : NavigatorFragment() {
 
         setupView(imageTransionData)
 
-        delayEnterTransitionBy(3000)
+        handler.postDelayed(postponeTransitionRunnable, 3000)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        handler.removeCallbacksAndMessages(postponeTransitionRunnable)
     }
 
     private fun setupView(item: DataItem) {
@@ -58,12 +74,6 @@ class DetailsFragment : NavigatorFragment() {
 
         picasso.load(item.imgUrl)
             .into(detailImageView)
-    }
-
-    private fun delayEnterTransitionBy(delayMs: Long) {
-        Handler().postDelayed({
-            startPostponedEnterTransition()
-        }, delayMs)
     }
 
 }
