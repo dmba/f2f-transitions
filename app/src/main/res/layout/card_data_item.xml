@@ -23,13 +23,8 @@
             android:id="@+id/dataItemName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="4dp"
             android:layout_alignBottom="@id/dataItemImage"
-            android:shadowColor="@android:color/black"
-            android:shadowRadius="4"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:textSize="18sp"
+            style="@style/AppTextLabel"
         />
 
     </me.dmba.f2ftransitions.utils.SquareRelativeLayout>

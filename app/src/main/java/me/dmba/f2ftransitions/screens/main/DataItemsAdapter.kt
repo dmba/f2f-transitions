@@ -1,5 +1,6 @@
 package me.dmba.f2ftransitions.screens.main
 
+import android.support.v4.view.ViewCompat
 import android.support.v7.widget.RecyclerView.Adapter
 import android.support.v7.widget.RecyclerView.ViewHolder
 import android.view.LayoutInflater
@@ -20,15 +21,23 @@ class DataItemViewHolder(
     itemView: View
 ) : ViewHolder(itemView) {
 
+    val sharedView: View get() = itemView.dataItemImage
+
     private val picasso: Picasso by lazy {
         Picasso.get()
     }
 
     fun bindData(item: DataItem) {
+        setTransitionName(item.id)
+
         itemView.dataItemName.text = item.name
         picasso.load(item.imgUrl)
             .placeholder(R.drawable.ic_launcher_background)
             .into(itemView.dataItemImage)
+    }
+
+    private fun setTransitionName(transitionName: String) {
+        ViewCompat.setTransitionName(sharedView, transitionName)
     }
 
 }
@@ -48,7 +57,7 @@ class DataItemsAdapter(
 
     override fun onBindViewHolder(holder: DataItemViewHolder, position: Int) {
         holder.bindData(data[position])
-        holder.itemView.setOnClickListener { onClick(data[position], it) }
+        holder.itemView.setOnClickListener { onClick(data[position], holder.sharedView) }
     }
 
 }
