@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.fragment_details.*
 import me.dmba.f2ftransitions.R
 import me.dmba.f2ftransitions.data.DataItem
 import me.dmba.f2ftransitions.extensions.arg
+import me.dmba.f2ftransitions.extensions.toast
 import me.dmba.f2ftransitions.screens.base.NavigatorFragment
 
 /**
@@ -27,10 +28,20 @@ fun newDetailsFragment(data: DataItem, transitionName: String) = DetailsFragment
 
 class DetailsFragment : NavigatorFragment() {
 
-    private val imageTransionName: String by arg(ARG_TRANSITION_NAME)
-    private val imageTransionData: DataItem by arg(ARG_TRANSITION_DATA)
+    private val transitionName: String by arg(ARG_TRANSITION_NAME)
+    private val transitionData: DataItem by arg(ARG_TRANSITION_DATA)
 
     private val picasso: Picasso by lazy { Picasso.get() }
+
+    private val handler = Handler()
+
+    private val postponeTransitionRunnable: Runnable = Runnable {
+
+        startPostponedEnterTransition()
+
+        toast("startPostponedEnterTransition: ${transitionData.id}")
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,11 +57,16 @@ class DetailsFragment : NavigatorFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        detailImageView.transitionName = imageTransionName
+        detailImageView.transitionName = transitionName
 
-        setupView(imageTransionData)
+        setupView(transitionData)
 
-        delayEnterTransitionBy(3000)
+        handler.postDelayed(postponeTransitionRunnable, 1500)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        handler.removeCallbacks(postponeTransitionRunnable)
     }
 
     private fun setupView(item: DataItem) {
@@ -58,12 +74,6 @@ class DetailsFragment : NavigatorFragment() {
 
         picasso.load(item.imgUrl)
             .into(detailImageView)
-    }
-
-    private fun delayEnterTransitionBy(delayMs: Long) {
-        Handler().postDelayed({
-            startPostponedEnterTransition()
-        }, delayMs)
     }
 
 }
