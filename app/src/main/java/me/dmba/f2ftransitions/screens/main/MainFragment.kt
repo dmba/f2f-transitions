@@ -1,6 +1,6 @@
 package me.dmba.f2ftransitions.screens.main
 
-import android.content.res.Configuration
+import android.content.res.Configuration.ORIENTATION_PORTRAIT
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
@@ -20,13 +20,11 @@ fun newMainFragment() = MainFragment()
 
 class MainFragment : NavigatorFragment() {
 
-    private val isPortrait: Boolean by lazy {
-        resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
-    }
+    private val isPortrait: Boolean
+        get() = resources.configuration.orientation == ORIENTATION_PORTRAIT
 
-    private val dataItemsAdapter: DataItemsAdapter by lazy {
-        DataItemsAdapter(data, layoutInflater, navigator::goToDetailsScreen)
-    }
+    private val dataItemsAdapter: DataItemsAdapter
+        get() = DataItemsAdapter(data, layoutInflater, navigator::goToDetailsScreen)
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,

@@ -1,6 +1,7 @@
 package me.dmba.f2ftransitions.screens.base
 
 import android.content.Context
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import me.dmba.f2ftransitions.screens.MainNavigator
 
@@ -10,6 +11,11 @@ import me.dmba.f2ftransitions.screens.MainNavigator
 abstract class NavigatorFragment : Fragment() {
 
     protected lateinit var navigator: MainNavigator
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
