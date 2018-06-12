@@ -57,7 +57,7 @@ class DetailsFragment : NavigatorFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        detailImageView.transitionName = transitionName
+        detailPhotoView.transitionName = transitionName
 
         setupView(transitionData)
 
@@ -73,7 +73,7 @@ class DetailsFragment : NavigatorFragment() {
         detailImageName.text = item.name
 
         picasso.load(item.imgUrl)
-            .into(detailImageView)
+            .into(detailPhotoView)
     }
 
 }
